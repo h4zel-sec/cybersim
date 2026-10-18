@@ -1,0 +1,166 @@
+/* ============================================
+   style.css — Shared styles for CyberSim
+   ============================================ */
+
+/* --- CSS Variables --- */
+:root {
+  --bg-primary:    #0a0c0f;
+  --bg-secondary:  #0f1317;
+  --bg-panel:      #121519;
+  --bg-terminal:   #080a0c;
+  --border:        #1e2530;
+  --border-bright: #2a3545;
+  --accent:        #00ff88;
+  --accent-bright: #33ffaa;
+  --accent-dim:    rgba(0, 255, 136, 0.12);
+  --danger:        #ff4455;
+  --warning:       #ffb830;
+  --info:          #38b2ff;
+  --text-primary:  #d8e0ec;
+  --text-muted:    #556070;
+  --text-terminal: #00ff88;
+  --font-mono:     'Courier New', 'Lucida Console', monospace;
+}
+
+/* --- Reset & Base --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- Stage 2: Residential UI (visual-only nodes) --- */
+.node-residence .node-label { font-size: .58rem; }
+.node-box.node-box-sm { width: 84px; height: 54px; }
+
+.res-shortage {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  width: 18px;
+  height: 18px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  background: rgba(255, 184, 48, 0.12);
+  border: 1px solid rgba(255, 184, 48, 0.55);
+  color: var(--warning);
+  font-size: .72rem;
+  box-shadow: 0 0 16px rgba(255, 184, 48, 0.25);
+  transform-origin: 50% 50%;
+  animation: shortagePop 900ms ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes shortagePop {
+  0%   { transform: scale(0.85); opacity: 0.25; }
+  40%  { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.45; }
+}
+
+/* --- Insight panel (below objectives) --- */
+.insight-panel {
+  margin-top: .75rem;
+  padding: .65rem .85rem;
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--info);
+  background: rgba(56, 178, 255, 0.05);
+  border-radius: 3px;
+}
+.insight-title {
+  font-size: .66rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: .35rem;
+}
+.insight-text {
+  font-size: .75rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+
+/* --- End-of-prototype popup --- */
+#end-popup {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 12, 15, 0.78);
+  backdrop-filter: blur(2px);
+}
+#end-popup.show { display: flex; }
+.end-popup-card {
+  width: min(520px, calc(100vw - 48px));
+  padding: 1.1rem 1.2rem;
+  border: 1px solid var(--border-bright);
+  border-radius: 6px;
+  background: linear-gradient(180deg, rgba(18,21,25,0.98), rgba(10,12,15,0.98));
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.55);
+  text-align: center;
+}
+.end-popup-title {
+  font-size: 1.35rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--danger);
+  margin-bottom: .35rem;
+}
+.end-popup-sub {
+  font-size: .82rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.end-popup-close {
+  margin-top: .85rem;
+  padding: .45rem .75rem;
+  background: transparent;
+  border: 1px solid var(--border-bright);
+  color: var(--text-primary);
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: .78rem;
+  cursor: pointer;
+}
+.end-popup-close:hover {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* --- Scrollbar (webkit) --- */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-bright);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
